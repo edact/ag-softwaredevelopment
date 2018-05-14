@@ -15,7 +15,6 @@ function setup() {
     //die Leinwand wird erzeugt
     createCanvas(canvasSize, canvasSize);
 
-
     //Elemente sollen ohne Rahmen gezeichnet werden
     noStroke();
 
@@ -30,9 +29,7 @@ function setup() {
     agCar.moveForward();
     agCar.moveForward();
     agCar.moveForward();
-    agCar.moveForward();
     agCar.turnLeft();
-    agCar.moveForward();
     agCar.moveForward();
     agCar.moveForward();
     agCar.moveForward();
