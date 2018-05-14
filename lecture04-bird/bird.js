@@ -13,7 +13,7 @@ function CtBird() {
                 this.speed += this.acceleration;
             }
 
-            //falls der Vogel nicht tot ist, die Position wird verändert
+            //falls der Vogel nicht tot ist, wird die Position verändert
             if(this.y < canvasHeight) {
                 this.y += this.speed;
             } else {
