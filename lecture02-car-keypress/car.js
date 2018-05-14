@@ -14,11 +14,15 @@ function AgCar() {
     }
 
     this.turnLeft = function() {
-        this.direction -= PI/2;
+        /*
+        *   hier muss Code hin, der das Auto nach links dreht
+        */
     }
 
     this.turnRight = function() {
-        this.direction += PI/2;
+        /*
+        *   hier muss Code hin, der das Auto nach rechts dreht
+        */
     }
 
     this.moveForward = function () {
