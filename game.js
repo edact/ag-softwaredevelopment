@@ -23,6 +23,20 @@ function setup() {
     agCar = new AgCar();
     agTrail = [];
     agGoal = new AgGoal();
+
+    agCar.turnLeft();
+    agCar.turnLeft();
+    agCar.moveForward();
+    agCar.moveForward();
+    agCar.moveForward();
+    agCar.moveForward();
+    agCar.moveForward();
+    agCar.turnLeft();
+    agCar.moveForward();
+    agCar.moveForward();
+    agCar.moveForward();
+    agCar.moveForward();
+    agCar.moveForward();
 }
 
 //diese p5.js-Standardfunktion wird Frame für Frame erneut ausgeführt
@@ -41,6 +55,17 @@ function draw() {
 
     //Auto wird angezeigt
     agCar.show();
+
+    for(i = -7; i <= 7; i++) {
+        for(j = -7; j <= 7; j++) {
+            translate(canvasSize/2, canvasSize/2);
+            noFill();
+            rectMode(CENTER);
+            stroke(33,33,33);
+            rect(carSize * i, carSize * j, carSize, carSize);
+            translate(-canvasSize/2, -canvasSize/2);
+        }
+    }
 }
 
 function AgCar() {
