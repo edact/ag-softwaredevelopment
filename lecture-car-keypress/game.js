@@ -7,33 +7,22 @@ var agGoal;
 var canvasSize = 600;
 var carSize = canvasSize/15;
 var trailSize = canvasSize/25;
-var goalX = -4;
-var goalY = 4;
+var goalX = round(random(-7.5, 7.5));
+var goalY = round(random(-7.5, 7.5));
 
 //diese p5.js-Standardfunktion wird zum Start einmal ausgeführt
 function setup() {
     //die Leinwand wird erzeugt
     createCanvas(canvasSize, canvasSize);
 
-    //Elemente sollen ohne Rahmen gezeichnet werden
-    noStroke();
-
     //Objekt des Autos wird erzeugt
     agCar = new AgCar();
-    agTrail = [];
-    agGoal = new AgGoal();
 
-    agCar.turnLeft();
-    agCar.turnLeft();
-    agCar.moveForward();
-    agCar.moveForward();
-    agCar.moveForward();
-    agCar.moveForward();
-    agCar.turnLeft();
-    agCar.moveForward();
-    agCar.moveForward();
-    agCar.moveForward();
-    agCar.moveForward();
+    //Array für die Autospur wird erzeugt
+    agTrail = [];
+
+    //Objekt für das Ziel wird erzeugt
+    agGoal = new AgGoal();
 }
 
 //diese p5.js-Standardfunktion wird Frame für Frame erneut ausgeführt
@@ -43,7 +32,7 @@ function draw() {
 
     //durch alle Spurelemente iterieren
     for(var i = agTrail.length - 1; i >= 0; i--) {
-        //Spur anzeigen
+        //Spurelement anzeigen
         agTrail[i].show();
     }
 
@@ -53,6 +42,7 @@ function draw() {
     //Auto wird angezeigt
     agCar.show();
 
+    //Gitter wird gezeichnet
     for(i = -7; i <= 7; i++) {
         for(j = -7; j <= 7; j++) {
             translate(canvasSize/2, canvasSize/2);
@@ -65,58 +55,12 @@ function draw() {
     }
 }
 
-function AgCar() {
-    this.x = canvasSize/2;
-    this.y = canvasSize/2;
-    this.direction = 0;
-    this.trail = [];
-
-    this.show = function () {
-        fill(0,0,255);
-        translate(this.x, this.y);
-        rotate(this.direction);
-        triangle(-carSize/2, -carSize/2 + 5, -carSize/2, carSize/2 - 5, carSize/2,0);
-        rotate(-this.direction);
-        translate(-this.x, -this.y);
-    }
-
-    this.turnLeft = function() {
-        this.direction -= PI/2;
-    }
-
-    this.turnRight = function() {
-        this.direction += PI/2;
-    }
-
-    this.moveForward = function () {
-        agTrail.push(new AgTrail(this.x, this.y));
-
-        if(cos(this.direction) == 1) {
-            this.x += carSize;
-        }
-        if(cos(this.direction) == -1) {
-            this.x -= carSize;
-        }
-
-        if(sin(this.direction) == 1) {
-            this.y += carSize;
-        }
-        if(sin(this.direction) == -1) {
-            this.y -= carSize;
-        }
-
-        if(this.x - canvasSize/2 - agGoal.x == 0 && this.y - canvasSize/2 - agGoal.y == 0) {
-            alert('YOU WON\n steps: '+agTrail.length);
-        }
-    }
-}
-
+//Klasse für das Ziel, das erreicht werden soll
 function AgGoal() {
-    this.x = carSize * round(random(-7.5, 7.5));
     this.x = carSize * goalX;
-    this.y = carSize * round(random(-7.5, 7.5));
     this.y = carSize * goalY;
 
+    //Ziel anzeigen
     this.show = function () {
         fill(255,255,0);
         translate(canvasSize/2, canvasSize/2);
@@ -125,25 +69,31 @@ function AgGoal() {
     }
 }
 
+//Klasse für ein Spurelement, das durch das Auto erzeugt wird
 function AgTrail(x,y) {
     this.x = x;
     this.y = y;
 
+    //Spurelement anzeigen
     this.show = function() {
         fill(0,0,255);
         ellipse(this.x, this.y, trailSize, trailSize);
     }
 }
 
+//dieses p5.js-Standardfunktion fängt alle Tastendrücke ab
 function keyPressed() {
+    //Pfeiltaste nach oben und das Auto bewegt sich nach vorn
     if (keyCode == UP_ARROW) {
         agCar.moveForward();
     }
 
+    //Pfeiltaste nach links und das Auto dreht sich nach links
     if (keyCode == LEFT_ARROW) {
         agCar.turnLeft();
     }
 
+    //Pfeiltaste nach rechts und das Auto dreht sich nach rechts
     if (keyCode == RIGHT_ARROW) {
         agCar.turnRight();
     }
