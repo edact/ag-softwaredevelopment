@@ -7,11 +7,12 @@ var agGoal;
 var canvasSize = 600;
 var carSize = canvasSize/15;
 var trailSize = canvasSize/25;
-var goalX = round(random(-7.5, 7.5));
-var goalY = round(random(-7.5, 7.5));
 
 //diese p5.js-Standardfunktion wird zum Start einmal ausgeführt
 function setup() {
+    goalX = round(random(-7.5, 7.5));
+    goalY = round(random(-7.5, 7.5));
+
     //die Leinwand wird erzeugt
     createCanvas(canvasSize, canvasSize);
 
